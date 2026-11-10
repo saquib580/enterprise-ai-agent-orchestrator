@@ -1,13 +1,11 @@
 """Generic asynchronous repository with tenant-safe access patterns."""
 
-from typing import Any, TypeVar
+from typing import Any, cast
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.base import BaseModel
-
-ModelT = TypeVar("ModelT", bound=BaseModel)
 
 
 class BaseRepository[ModelT: BaseModel]:
@@ -22,10 +20,13 @@ class BaseRepository[ModelT: BaseModel]:
     ) -> ModelT | None:
         """Retrieve an entity; tenant-owned models require tenant_id."""
         statement = select(self.model).where(self.model.id == entity_id)
+
         if hasattr(self.model, "tenant_id"):
             if tenant_id is None:
                 raise ValueError("tenant_id is required for tenant-owned models")
-            statement = statement.where(self.model.tenant_id == tenant_id)
+
+            statement = statement.where(cast(Any, self.model).tenant_id == tenant_id)
+
         result = await self.session.execute(statement)
         return result.scalar_one_or_none()
 
@@ -35,13 +36,18 @@ class BaseRepository[ModelT: BaseModel]:
         """Return bounded, ordered records."""
         if skip < 0:
             raise ValueError("skip cannot be negative")
+
         if not 1 <= limit <= 500:
             raise ValueError("limit must be between 1 and 500")
+
         statement = select(self.model).order_by(self.model.id).offset(skip).limit(limit)
+
         if hasattr(self.model, "tenant_id"):
             if tenant_id is None:
                 raise ValueError("tenant_id is required for tenant-owned models")
-            statement = statement.where(self.model.tenant_id == tenant_id)
+
+            statement = statement.where(cast(Any, self.model).tenant_id == tenant_id)
+
         result = await self.session.execute(statement)
         return list(result.scalars().all())
 
@@ -50,9 +56,12 @@ class BaseRepository[ModelT: BaseModel]:
         if hasattr(self.model, "tenant_id"):
             if tenant_id is None:
                 raise ValueError("tenant_id is required for tenant-owned models")
+
             values["tenant_id"] = tenant_id
+
         entity = self.model(**values)
         self.session.add(entity)
         await self.session.flush()
         await self.session.refresh(entity)
+
         return entity

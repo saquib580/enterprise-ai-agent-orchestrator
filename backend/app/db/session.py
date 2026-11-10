@@ -3,13 +3,18 @@
 from collections.abc import AsyncIterator
 from functools import lru_cache
 
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
 
 from app.core.config import get_settings
 
 
 @lru_cache(maxsize=1)
-def get_engine():
+def get_engine() -> AsyncEngine:
     """Create the process-wide engine on first database access."""
     settings = get_settings()
     return create_async_engine(
@@ -27,7 +32,10 @@ def get_engine():
 def get_session_factory() -> async_sessionmaker[AsyncSession]:
     """Return the cached asynchronous session factory."""
     return async_sessionmaker(
-        bind=get_engine(), class_=AsyncSession, expire_on_commit=False, autoflush=False
+        bind=get_engine(),
+        class_=AsyncSession,
+        expire_on_commit=False,
+        autoflush=False,
     )
 
 
