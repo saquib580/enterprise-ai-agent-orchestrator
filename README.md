@@ -92,7 +92,7 @@ enterprise-ai-agent-orchestrator/
 │   └── pyproject.toml
 ├── docs/
 │   ├── PRODUCT_OVERVIEW_AND_ARCHITECTURE.md
-│   └── 90_DAY_DAILY_ENGINEERING_PLAN.md
+│   └── High-Level%20Architecture.png
 ├── .editorconfig
 ├── .env.example
 ├── .gitattributes
