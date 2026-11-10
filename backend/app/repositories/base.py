@@ -17,7 +17,9 @@ class BaseRepository[ModelT: BaseModel]:
         self.session = session
         self.model = model
 
-    async def get(self, entity_id: int, *, tenant_id: int | None = None) -> ModelT | None:
+    async def get(
+        self, entity_id: int, *, tenant_id: int | None = None
+    ) -> ModelT | None:
         """Retrieve an entity; tenant-owned models require tenant_id."""
         statement = select(self.model).where(self.model.id == entity_id)
         if hasattr(self.model, "tenant_id"):
