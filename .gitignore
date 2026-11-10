@@ -1,0 +1,270 @@
+
+# =====================================================
+# 1. PYTHON
+# =====================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.manifest
+*.spec
+
+# Python environments
+.venv/
+venv/
+env/
+ENV/
+virtualenv/
+.python-version
+
+# Package managers
+.pip-cache/
+pip-wheel-metadata/
+.poetry/
+.pdm-python
+.pdm-build/
+.rye/
+uv.lock.backup
+
+# =====================================================
+# 2. ENVIRONMENT VARIABLES & SECRETS
+# =====================================================
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+secrets/
+credentials/
+service-account*.json
+
+# =====================================================
+# 3. PYTHON TESTING & COVERAGE
+# =====================================================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+nosetests.xml
+test-results/
+junit.xml
+.hypothesis/
+.pyre/
+.pytype/
+.mypy_cache/
+.dmypy.json
+.ruff_cache/
+
+# =====================================================
+# 4. LOGS & TEMPORARY FILES
+# =====================================================
+*.log
+*.log.*
+logs/
+log/
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+*.orig
+
+# =====================================================
+# 5. DATABASE & LOCAL DATA
+# =====================================================
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.sql.gz
+mysql-data/
+postgres-data/
+redis-data/
+database-data/
+data/local/
+data/tmp/
+
+# =====================================================
+# 6. AI / ML / LANGCHAIN / LANGGRAPH
+# =====================================================
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.h5
+*.pb
+*.model
+*.bin
+models/
+checkpoints/
+embeddings/
+vector_store/
+vectorstore/
+chroma/
+chroma_db/
+faiss_index/
+.index_cache/
+.cache/huggingface/
+.cache/torch/
+.cache/transformers/
+
+# AI experiment outputs
+mlruns/
+wandb/
+tensorboard/
+lightning_logs/
+outputs/
+artifacts/
+evaluation-results/
+
+# =====================================================
+# 7. DOCUMENT UPLOADS & GENERATED FILES
+# =====================================================
+uploads/
+uploaded_files/
+generated_files/
+generated_documents/
+*.upload
+*.part
+
+# =====================================================
+# 8. NODE.JS / REACT / TYPESCRIPT
+# =====================================================
+node_modules/
+bower_components/
+.npm/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/install-state.gz
+
+# Build outputs
+dist/
+build/
+.next/
+.nuxt/
+.output/
+.turbo/
+.parcel-cache/
+.vite/
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Frontend environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =====================================================
+# 9. IDE & EDITORS
+# =====================================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# =====================================================
+# 10. OPERATING SYSTEM
+# =====================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# =====================================================
+# 11. DOCKER & CONTAINER RUNTIME
+# =====================================================
+.docker/
+docker-data/
+*.pid
+*.sock
+
+# =====================================================
+# 12. CLOUD & INFRASTRUCTURE
+# =====================================================
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+override.tf
+override.tf.json
+.terragrunt-cache/
+
+# Kubernetes local configuration
+kubeconfig
+kubeconfig.*
+.secrets/
+
+# =====================================================
+# 13. GIT & LOCAL TOOLING
+# =====================================================
+*.patch
+*.diff
+.git-credentials
+.DS_Store
+
+# =====================================================
+# 14. JUPYTER NOTEBOOKS
+# =====================================================
+.ipynb_checkpoints/
+
+# =====================================================
+# 15. PROFILING & PERFORMANCE
+# =====================================================
+.prof
+.profraw
+*.prof
+*.lprof
+profile/
+benchmark-results/
+
+# =====================================================
+# 16. GENERATED API DOCUMENTATION
+# =====================================================
+swagger-ui-dist/
+openapi-generated/
+
+# =====================================================
+# 17. LOCAL DEVELOPMENT CONFIGURATION
+# =====================================================
+.local/
+.devcontainer/local/
+.envrc
+.direnv/
+
+# =====================================================
+# 18. GENERATED FRONTEND TYPES & REPORTS
+# =====================================================
+storybook-static/
+playwright-report/
+test-results/
+.nyc_output/
+
