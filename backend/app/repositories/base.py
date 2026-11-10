@@ -1,7 +1,6 @@
 """Generic asynchronous repository with tenant-safe access patterns."""
 
-from abc import ABC
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -11,7 +10,7 @@ from app.db.base import BaseModel
 ModelT = TypeVar("ModelT", bound=BaseModel)
 
 
-class BaseRepository(ABC, Generic[ModelT]):
+class BaseRepository[ModelT: BaseModel]:
     """Reusable reads and create operation; caller owns transaction commit."""
 
     def __init__(self, session: AsyncSession, model: type[ModelT]) -> None:
@@ -24,7 +23,7 @@ class BaseRepository(ABC, Generic[ModelT]):
         if hasattr(self.model, "tenant_id"):
             if tenant_id is None:
                 raise ValueError("tenant_id is required for tenant-owned models")
-            statement = statement.where(getattr(self.model, "tenant_id") == tenant_id)
+            statement = statement.where(self.model.tenant_id == tenant_id)
         result = await self.session.execute(statement)
         return result.scalar_one_or_none()
 
@@ -40,7 +39,7 @@ class BaseRepository(ABC, Generic[ModelT]):
         if hasattr(self.model, "tenant_id"):
             if tenant_id is None:
                 raise ValueError("tenant_id is required for tenant-owned models")
-            statement = statement.where(getattr(self.model, "tenant_id") == tenant_id)
+            statement = statement.where(self.model.tenant_id == tenant_id)
         result = await self.session.execute(statement)
         return list(result.scalars().all())
 
